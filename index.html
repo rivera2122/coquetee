@@ -3,230 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Horario Coquette 🎀</title>
+    <title>Horario de Clases 2026</title>
     <style>
-        /* Importando fuentes coquette y elegantes */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        :root {
+            --bg-color: #fdfbf7;
+            --main-text: #5a4a42;
+            --accent-coquette: #e8c5c8;
+            --accent-gold: #d4af37;
+            
+            /* Colores de las cabeceras de los días */
+            --th-hora: #e28f76;
+            --th-lunes: #8faec4;
+            --th-martes: #c48f80;
+            --th-miercoles: #8fa189;
+            --th-jueves: #d0a66b;
+            --th-viernes: #719192;
+
+            /* Colores pasteles para las materias */
+            --biofisica-bg: #fceade; --biofisica-text: #a96149; --biofisica-border: #f3d2be;
+            --ingles-bg: #ebf2fa; --ingles-text: #4a6fa5; --ingles-border: #d2e2f5;
+            --biologia-bg: #f9ebea; --biologia-text: #a94442; --biologia-border: #f2dede;
+            --quimica-bg: #fef5e7; --quimica-text: #b07d2a; --quimica-border: #f6e3cc;
+            --lab-bg: #e8f8f5; --lab-text: #117a65; --lab-border: #d1f2eb;
+            --psicologia-bg: #f5eef8; --psicologia-text: #6c3483; --psicologia-border: #ebdef0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
-            background-color: #fff0f5; /* Rosa muy suave */
-            background-image: radial-gradient(#ffb6c1 1.5px, transparent 1.5px);
-            background-size: 25px 25px;
-            font-family: 'Playfair Display', serif;
-            color: #6a4a52;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            margin: 0;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Decoración de brillitos flotantes en el fondo */
+        .ambient-sparkle {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(220, 160, 160, 0.3);
+            pointer-events: none;
+            animation: float-around 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-around {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-15px) rotate(15deg); }
         }
 
         .container {
-            background: #ffffff;
-            border: 2px dashed #ffb6c1; /* Borde punteado rosita */
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
-            max-width: 1000px;
             width: 100%;
+            max-width: 1200px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(165, 140, 130, 0.1);
+            position: relative;
+            border: 1px solid #f3ece4;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            text-align: center;
-            color: #db7093;
-            font-size: 3.5em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.5);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .subtitle {
+        /* Moños coquette superiores */
+        .ribbon-decor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .ribbon {
+            font-size: 28px;
+            animation: pulse-bow 3s ease-in-out infinite;
+        }
+        @keyframes pulse-bow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            color: #b58263;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #9a8478;
             font-style: italic;
-            margin-bottom: 35px;
-            color: #ff8ca3;
-            font-size: 1.1em;
         }
 
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+        /* Grid cronológico y responsivo */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 16px;
         }
 
-        .day {
-            background: #fff5f7;
-            border: 1px solid #ffe4e8;
-            border-radius: 18px;
-            padding: 15px;
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+            min-width: 850px;
+        }
+
+        th {
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-align: center;
             transition: transform 0.3s ease;
         }
-
-        .day:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+        th:hover {
+            transform: translateY(-2px);
         }
 
-        .day-title {
-            text-align: center;
-            font-weight: bold;
-            color: #d14978;
-            border-bottom: 2px dotted #ffb6c1;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
+        .th-hora { background-color: var(--th-hora); }
+        .th-lunes { background-color: var(--th-lunes); }
+        .th-martes { background-color: var(--th-martes); }
+        .th-miercoles { background-color: var(--th-miercoles); }
+        .th-jueves { background-color: var(--th-jueves); }
+        .th-viernes { background-color: var(--th-viernes); }
 
-        .class-card {
-            background: #ffffff;
-            border-left: 4px solid #ffb6c1; /* Detalle lateral coquette */
+        td {
             padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            font-size: 0.9em;
-        }
-
-        .class-time {
-            font-weight: bold;
-            color: #db7093;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .class-name {
-            margin: 8px 0;
-            font-weight: bold;
-            line-height: 1.3;
-        }
-
-        .class-room {
-            font-style: italic;
-            font-size: 0.85em;
-            color: #9e7f86;
-        }
-
-        .free-day {
             text-align: center;
-            color: #ffb6c1;
-            font-style: italic;
-            margin-top: 40px;
-            font-size: 1.1em;
+            vertical-align: middle;
+            border-radius: 14px;
+            background-color: #ffffff;
+            border: 1px solid #f6f0ea;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        /* Efecto de elevación interactivo en las materias */
+        td:not(.time-cell):not(.bg-empty):hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(181, 130, 99, 0.15);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .time-cell {
+            background-color: #fcf5ee;
+            color: #8d6e63;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px dashed #e3d5ca;
+            min-width: 110px;
+        }
+
+        .subject {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .time-tag {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* Clases CSS de las materias según paleta coquette */
+        .bg-biofisica { background-color: var(--biofisica-bg); color: var(--biofisica-text); border: 1px solid var(--biofisica-border); }
+        .bg-ingles { background-color: var(--ingles-bg); color: var(--ingles-text); border: 1px solid var(--ingles-border); }
+        .bg-biologia { background-color: var(--biologia-bg); color: var(--biologia-text); border: 1px solid var(--biologia-border); }
+        .bg-quimica { background-color: var(--quimica-bg); color: var(--quimica-text); border: 1px solid var(--quimica-border); }
+        .bg-lab { background-color: var(--lab-bg); color: var(--lab-text); border: 1px solid var(--lab-border); }
+        .bg-psicologia { background-color: var(--psicologia-bg); color: var(--psicologia-text); border: 1px solid var(--psicologia-border); }
+        .bg-empty { background-color: #fdfdfd; border: 1px dashed #eae5e0; opacity: 0.5; }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #b5a499;
+            letter-spacing: 0.5px;
+        }
+
+        .scroll-tip {
+            display: none;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #c4b4a9;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-tip { display: block; }
+            .header h1 { font-size: 1.8rem; }
+            body { padding: 10px; }
+            .container { padding: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🎀 Mi Horario de Clases 🎀</h1>
-        <div class="subtitle">✨ Medicina & Ciencia ✨🌷🦢</div>
+<!-- Elementos decorativos animados en el fondo -->
+<div class="ambient-sparkle" style="top: 15%; left: 8%;">✨</div>
+<div class="ambient-sparkle" style="top: 25%; right: 10%;">🌸</div>
+<div class="ambient-sparkle" style="top: 75%; left: 5%;">🌸</div>
+<div class="ambient-sparkle" style="top: 80%; right: 7%;">✨</div>
 
-        <div class="schedule-grid">
-            
-            <!-- LUNES -->
-            <div class="day">
-                <div class="day-title">Lunes 🌸</div>
-                
-                <div class="class-card">
-                    <div class="class-time">🕰️ 07:00 - 07:50</div>
-                    <div class="class-name">Biofísica Médica</div>
-                    <div class="class-room">📍 AULA A-7 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 10:00 - 11:40</div>
-                    <div class="class-name">Inglés II</div>
-                    <div class="class-room">📍 AULA A-6 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 15:00 - 16:40</div>
-                    <div class="class-name">Biología Molecular de la Célula</div>
-                    <div class="class-room">📍 AULA A-B Clase</div>
-                </div>
-            </div>
-
-            <!-- MARTES -->
-            <div class="day">
-                <div class="day-title">Martes 🌷</div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 08:00 - 09:40</div>
-                    <div class="class-name">Química Orgánica</div>
-                    <div class="class-room">📍 AULA A-1 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 11:00 - 12:40</div>
-                    <div class="class-name">Biología Molecular de la Célula</div>
-                    <div class="class-room">📍 AULA A-9 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 14:00 - 15:40</div>
-                    <div class="class-name">Biofísica Médica</div>
-                    <div class="class-room">📍 AULA A-7 Clase</div>
-                </div>
-            </div>
-
-            <!-- MIÉRCOLES -->
-            <div class="day">
-                <div class="day-title">Miércoles 🦢</div>
-                <div class="free-day">
-                    Día libre para el skincare y el estudio<br><br>✨🎀✨
-                </div>
-            </div>
-
-            <!-- JUEVES -->
-            <div class="day">
-                <div class="day-title">Jueves 🍓</div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 07:00 - 07:50</div>
-                    <div class="class-name">Inglés II</div>
-                    <div class="class-room">📍 AULA 4-6 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 11:00 - 11:50</div>
-                    <div class="class-name">Química Orgánica</div>
-                    <div class="class-room">📍 AULA A-1 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 14:00 - 15:40</div>
-                    <div class="class-name">Psicología General</div>
-                    <div class="class-room">📍 AULA A-B Clase</div>
-                </div>
-            </div>
-
-            <!-- VIERNES -->
-            <div class="day">
-                <div class="day-title">Viernes 🎀</div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 07:00 - 08:40</div>
-                    <div class="class-name">Biofísica Médica</div>
-                    <div class="class-room">📍 AULA A-2 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 12:00 - 13:40</div>
-                    <div class="class-name">Inglés II</div>
-                    <div class="class-room">📍 AULA A-6 Clase</div>
-                </div>
-
-                <div class="class-card">
-                    <div class="class-time">🕰️ 14:00 - 15:40</div>
-                    <div class="class-name">Psicología General</div>
-                    <div class="class-room">📍 AULA A-B Clase</div>
-                </div>
-            </div>
-
-        </div>
+<div class="container">
+    <div class="ribbon-decor">
+        <span class="ribbon">🎀</span>
+        <span class="ribbon" style="animation-delay: 1.5s;">🎀</span>
     </div>
+    
+    <div class="header">
+        <h1>Horario de Clases 2026</h1>
+        <p>Universidad Alberto Masferrer &bull; Facultad de Medicina y Ciencias de la Salud</p>
+    </div>
+
+    <div class="scroll-tip">↔ Desliza horizontalmente para ver el horario completo</div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th class="th-hora" style="width: 14%;">Hora</th>
+                    <th class="th-lunes" id="col-1">Lunes</th>
+                    <th class="th-martes" id="col-2">Martes</th>
+                    <th class="th-miercoles" id="col-3">Miércoles</th>
+                    <th class="th-jueves" id="col-4">Jueves</th>
+                    <th class="th-viernes" id="col-5">Viernes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Bloque 1: Mañana Temprano -->
+                <tr>
+                    <td class="time-cell">07:00 AM<br>–<br>07:50 AM</td>
+                    <td class="bg-biofisica" rowspan="2">
+                        <div class="subject">Biofísica</div>
+                        <div class="time-tag">7:00 – 8:40 am</div>
+                    </td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-ingles">
+                        <div class="subject">Inglés</div>
+                        <div class="time-tag">7:00 – 7:50 am</div>
+                    </td>
+                    <td class="bg-biofisica">
+                        <div class="subject">Biofísica</div>
+                        <div class="time-tag">7:00 – 7:50 am</div>
+                    </td>
+                </tr>
+                <!-- Bloque 2: Segunda Hora Mañana -->
+                <tr>
+                    <td class="time-cell">07:50 AM<br>–<br>08:40 AM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                </tr>
+                <!-- Bloque 3: Bloque de las 8:00 AM -->
+                <tr>
+                    <td class="time-cell">08:00 AM<br>–<br>09:40 AM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-quimica">
+                        <div class="subject">Química</div>
+                        <div class="time-tag">8:00 – 9:40 am</div>
+                    </td>
+                    <td class="bg-lab" rowspan="2">
+                        <div class="subject">Laboratorio</div>
+                        <div class="time-tag">8:00 – 11:00 am</div>
+                    </td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-lab" rowspan="2">
+                        <div class="subject">Lab. Biología</div>
+                        <div class="time-tag">8:00 – 11:00 am</div>
+                    </td>
+                </tr>
+                <!-- Bloque 4: Transición Intermedia Laboratorios -->
+                <tr>
+                    <td class="time-cell">09:40 AM<br>–<br>11:00 AM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                </tr>
+                <!-- Bloque 5: Bloque 10 AM / 11 AM -->
+                <tr>
+                    <td class="time-cell">11:00 AM<br>–<br>11:50 AM</td>
+                    <td class="bg-ingles" rowspan="2" style="padding-top: 25px;">
+                        <div class="subject">Inglés</div>
+                        <div class="time-tag">10:00 – 11:40 am</div>
+                    </td>
+                    <td class="bg-biologia" rowspan="2" style="padding-top: 25px;">
+                        <div class="subject">Biología</div>
+                        <div class="time-tag">11:00 am – 12:40 pm</div>
+                    </td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-quimica">
+                        <div class="subject">Química</div>
+                        <div class="time-tag">11:00 – 11:50 am</div>
+                    </td>
+                    <td class="bg-empty"></td>
+                </tr>
+                <!-- Bloque 6: Extensión de Clases del Mediodía -->
+                <tr>
+                    <td class="time-cell">11:50 AM<br>–<br>12:40 PM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                </tr>
+                <!-- Bloque 7: Mediodía Tarde -->
+                <tr>
+                    <td class="time-cell">12:00 PM<br>–<br>01:40 PM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-ingles">
+                        <div class="subject">Inglés</div>
+                        <div class="time-tag">12:00 – 1:40 pm</div>
+                    </td>
+                </tr>
+                <!-- Bloque 8: Bloque de la Tarde -->
+                <tr>
+                    <td class="time-cell">02:00 PM<br>–<br>03:40 PM</td>
+                    <td class="bg-biologia" rowspan="2" style="padding-top: 25px;">
+                        <div class="subject">Biología</div>
+                        <div class="time-tag">3:00 – 4:40 pm</div>
+                    </td>
+                    <td class="bg-biofisica">
+                        <div class="subject">Biofísica</div>
+                        <div class="time-tag">2:00 – 3:40 pm</div>
+                    </td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-psicologia">
+                        <div class="subject">Psicología</div>
+                        <div class="time-tag">2:00 – 3:40 pm</div>
+                    </td>
+                    <td class="bg-psicologia">
+                        <div class="subject">Psicología</div>
+                        <div class="time-tag">2:00 – 3:40 pm</div>
+                    </td>
+                </tr>
+                <!-- Bloque 9: Última hora de la tarde -->
+                <tr>
+                    <td class="time-cell">03:40 PM<br>–<br>04:40 PM</td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                    <td class="bg-empty"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-note">✨ Hecho con amor para organizar tus metas de estudio con elegancia ✨</div>
+</div>
+
+<script>
+    // Resalta de manera inteligente el día actual en el que estás navegando la web
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentDay = new Date().getDay(); // 1: Lun, 2: Mar, etc.
+        if (currentDay >= 1 && currentDay <= 5) {
+            const headerCol = document.getElementById(`col-${currentDay}`);
+            if (headerCol) {
+                headerCol.style.transform = "scale(1.03)";
+                headerCol.style.boxShadow = "0 4px 10px rgba(0,0,0,0.1)";
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
