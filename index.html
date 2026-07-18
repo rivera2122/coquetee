@@ -191,6 +191,20 @@
             border-radius: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
+        
+        /* Estilo para los salones */
+        .room-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background-color: rgba(0, 0, 0, 0.06);
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-top: 6px;
+            color: inherit;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
+        }
 
         /* Clases CSS de las materias según paleta coquette */
         .bg-biofisica { background-color: var(--biofisica-bg); color: var(--biofisica-text); border: 1px solid var(--biofisica-border); }
@@ -265,16 +279,19 @@
                     <td class="bg-biofisica" rowspan="2">
                         <div class="subject">Biofísica</div>
                         <div class="time-tag">7:00 – 8:40 am</div>
+                        <div class="room-tag">Aula 5-2</div>
                     </td>
                     <td class="bg-empty"></td>
                     <td class="bg-empty"></td>
                     <td class="bg-ingles">
                         <div class="subject">Inglés</div>
                         <div class="time-tag">7:00 – 7:50 am</div>
+                        <div class="room-tag">Aula 4-6</div>
                     </td>
                     <td class="bg-biofisica">
                         <div class="subject">Biofísica</div>
                         <div class="time-tag">7:00 – 7:50 am</div>
+                        <div class="room-tag">Aula A-2</div>
                     </td>
                 </tr>
                 <!-- Bloque 2: Segunda Hora Mañana -->
@@ -292,15 +309,17 @@
                     <td class="bg-quimica">
                         <div class="subject">Química</div>
                         <div class="time-tag">8:00 – 9:40 am</div>
+                        <div class="room-tag">Aula A-1</div>
                     </td>
                     <td class="bg-lab" rowspan="2">
-                        <div class="subject">Laboratorio</div>
+                        <div class="subject">Lab. Quím. Orgánica</div>
                         <div class="time-tag">8:00 – 11:00 am</div>
                     </td>
                     <td class="bg-empty"></td>
                     <td class="bg-lab" rowspan="2">
                         <div class="subject">Lab. Biología</div>
                         <div class="time-tag">8:00 – 11:00 am</div>
+                        <div class="room-tag">LAB</div>
                     </td>
                 </tr>
                 <!-- Bloque 4: Transición Intermedia Laboratorios -->
@@ -316,15 +335,18 @@
                     <td class="bg-ingles" rowspan="2" style="padding-top: 25px;">
                         <div class="subject">Inglés</div>
                         <div class="time-tag">10:00 – 11:40 am</div>
+                        <div class="room-tag">Aula A-6</div>
                     </td>
                     <td class="bg-biologia" rowspan="2" style="padding-top: 25px;">
                         <div class="subject">Biología</div>
                         <div class="time-tag">11:00 am – 12:40 pm</div>
+                        <div class="room-tag">Aula A-9</div>
                     </td>
                     <td class="bg-empty"></td>
                     <td class="bg-quimica">
                         <div class="subject">Química</div>
                         <div class="time-tag">11:00 – 11:50 am</div>
+                        <div class="room-tag">Aula A-1</div>
                     </td>
                     <td class="bg-empty"></td>
                 </tr>
@@ -345,6 +367,7 @@
                     <td class="bg-ingles">
                         <div class="subject">Inglés</div>
                         <div class="time-tag">12:00 – 1:40 pm</div>
+                        <div class="room-tag">Aula A-6</div>
                     </td>
                 </tr>
                 <!-- Bloque 8: Bloque de la Tarde -->
@@ -353,19 +376,23 @@
                     <td class="bg-biologia" rowspan="2" style="padding-top: 25px;">
                         <div class="subject">Biología</div>
                         <div class="time-tag">3:00 – 4:40 pm</div>
+                        <div class="room-tag">Aula A-8</div>
                     </td>
                     <td class="bg-biofisica">
                         <div class="subject">Biofísica</div>
                         <div class="time-tag">2:00 – 3:40 pm</div>
+                        <div class="room-tag">Aula A-7</div>
                     </td>
                     <td class="bg-empty"></td>
                     <td class="bg-psicologia">
                         <div class="subject">Psicología</div>
                         <div class="time-tag">2:00 – 3:40 pm</div>
+                        <div class="room-tag">Aula A-8</div>
                     </td>
                     <td class="bg-psicologia">
                         <div class="subject">Psicología</div>
                         <div class="time-tag">2:00 – 3:40 pm</div>
+                        <div class="room-tag">Aula A-8</div>
                     </td>
                 </tr>
                 <!-- Bloque 9: Última hora de la tarde -->
